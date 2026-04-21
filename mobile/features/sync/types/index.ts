@@ -20,16 +20,4 @@ export interface SyncItemRecord extends SyncableRecord {
   created_at: string;
 }
 
-export interface PushPayload {
-  lists: SyncListRecord[];
-  items: SyncItemRecord[];
-}
-
-export interface PullResponse {
-  lists: SyncListRecord[];
-  items: SyncItemRecord[];
-}
-
-export interface SyncMeta {
-  last_synced_at: string | null;
-}
+export type ElectricSyncStatus = 'connecting' | 'connected' | 'disconnected' | 'error';

@@ -4,7 +4,6 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import { runMigrations } from './migrate';
-import { syncRouter } from './routes/sync';
 
 const app = express();
 
@@ -14,8 +13,6 @@ app.use(express.json());
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
-
-app.use('/sync', syncRouter);
 
 const PORT = process.env.PORT || 3000;
 

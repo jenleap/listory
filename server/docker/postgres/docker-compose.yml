@@ -12,5 +12,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  electric:
+    image: electricsql/electric:latest
+    container_name: listory_electric
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      ELECTRIC_WRITE_TO_PG_MODE: direct_writes
+      AUTH_MODE: insecure
+    ports:
+      - "5133:5133"
+
 volumes:
   postgres_data:
