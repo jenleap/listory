@@ -14,6 +14,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../navigation/types';
 import { useItems } from '../../items/hooks/use-items';
 import { Item } from '../../items/types';
+import ItemRow from '../../items/ui/item-row';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'List'>;
 
@@ -21,7 +22,7 @@ const HEADER_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
 export default function ListScreen({ route }: Props) {
   const { listId } = route.params;
-  const { items, error, addItem } = useItems(listId);
+  const { items, error, addItem, editItem } = useItems(listId);
   const [inputText, setInputText] = useState('');
   const insets = useSafeAreaInsets();
   const inputRef = useRef<TextInput>(null);
@@ -40,13 +41,7 @@ export default function ListScreen({ route }: Props) {
   }
 
   function renderItem({ item }: { item: Item }) {
-    return (
-      <View style={styles.row}>
-        <Text style={[styles.rowText, item.completed && styles.completedText]}>
-          {item.text}
-        </Text>
-      </View>
-    );
+    return <ItemRow item={item} onEdit={editItem} />;
   }
 
   return (
@@ -103,19 +98,6 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     color: '#888',
     marginTop: 80,
-  },
-  row: {
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#ddd',
-  },
-  rowText: {
-    fontSize: 16,
-  },
-  completedText: {
-    textDecorationLine: 'line-through',
-    color: '#aaa',
   },
   inputContainer: {
     borderTopWidth: StyleSheet.hairlineWidth,

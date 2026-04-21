@@ -15,3 +15,9 @@ export interface CreateItemInput {
   section_id: string | null;
   text: string;
 }
+
+export interface EditItemInput {
+  id: string;
+  list_id: string;
+  new_text: string;
+}

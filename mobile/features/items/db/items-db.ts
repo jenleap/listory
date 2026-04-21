@@ -48,3 +48,42 @@ export function itemTextExistsInList(text: string, list_id: string): boolean {
   );
   return row != null;
 }
+
+export function itemTextExistsInListExcluding(text: string, list_id: string, excludeId: string): boolean {
+  const row = db.getFirstSync<{ id: string }>(
+    `SELECT id FROM items WHERE list_id = ? AND deleted_at IS NULL AND LOWER(TRIM(text)) = LOWER(TRIM(?)) AND id != ?`,
+    [list_id, text, excludeId]
+  );
+  return row != null;
+}
+
+export function getItemById(id: string): Item | null {
+  const row = db.getFirstSync<{
+    id: string;
+    text: string;
+    list_id: string;
+    section_id: string | null;
+    completed: number;
+    order: number;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string | null;
+  }>(`SELECT * FROM items WHERE id = ?`, [id]);
+
+  if (row == null) return null;
+  return { ...row, completed: row.completed === 1 };
+}
+
+export function updateItem(id: string, text: string, updatedAt: string): void {
+  db.runSync(
+    `UPDATE items SET text = ?, updated_at = ? WHERE id = ?`,
+    [text, updatedAt, id]
+  );
+}
+
+export function softDeleteItem(id: string, deletedAt: string, updatedAt: string): void {
+  db.runSync(
+    `UPDATE items SET deleted_at = ?, updated_at = ? WHERE id = ?`,
+    [deletedAt, updatedAt, id]
+  );
+}

@@ -1,6 +1,14 @@
 import { generateId } from '../../../utils/generate-id';
-import { Item, CreateItemInput } from '../types';
-import { insertItem, getItemsByList, itemTextExistsInList } from '../db/items-db';
+import { Item, CreateItemInput, EditItemInput } from '../types';
+import {
+  insertItem,
+  getItemsByList,
+  itemTextExistsInList,
+  itemTextExistsInListExcluding,
+  updateItem,
+  softDeleteItem,
+  getItemById,
+} from '../db/items-db';
 
 type AddItemResult =
   | { success: true; item: Item }
@@ -36,4 +44,28 @@ export function addItem(input: CreateItemInput): AddItemResult {
   insertItem(item);
 
   return { success: true, item };
+}
+
+type EditItemResult =
+  | { success: true; deleted: false; item: Item }
+  | { success: true; deleted: true }
+  | { success: false; error: string };
+
+export function editItem(input: EditItemInput): EditItemResult {
+  const trimmedText = input.new_text.trim();
+  const now = new Date().toISOString();
+
+  if (trimmedText === '') {
+    softDeleteItem(input.id, now, now);
+    return { success: true, deleted: true };
+  }
+
+  if (itemTextExistsInListExcluding(trimmedText, input.list_id, input.id)) {
+    return { success: false, error: 'An item with this name already exists' };
+  }
+
+  updateItem(input.id, trimmedText, now);
+
+  const updated = getItemById(input.id);
+  return { success: true, deleted: false, item: updated! };
 }

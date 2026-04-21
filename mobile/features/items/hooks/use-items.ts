@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Item } from '../types';
-import { addItem } from '../services/item-service';
+import { addItem, editItem } from '../services/item-service';
 import { getItemsByList } from '../db/items-db';
 
 export function useItems(list_id: string) {
@@ -25,5 +25,23 @@ export function useItems(list_id: string) {
     [list_id]
   );
 
-  return { items, error, addItem: handleAddItem };
+  const handleEditItem = useCallback(
+    (id: string, newText: string): boolean => {
+      const result = editItem({ id, list_id, new_text: newText });
+      if (!result.success) {
+        setError(result.error);
+        return false;
+      }
+      if (result.deleted) {
+        setItems((prev) => prev.filter((i) => i.id !== id));
+      } else {
+        setItems((prev) => prev.map((i) => (i.id === id ? result.item : i)));
+      }
+      setError(null);
+      return true;
+    },
+    [list_id]
+  );
+
+  return { items, error, addItem: handleAddItem, editItem: handleEditItem };
 }
