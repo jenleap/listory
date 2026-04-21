@@ -23,5 +23,10 @@ export function initSchema(): void {
       updated_at TEXT NOT NULL,
       deleted_at TEXT
     );
+
+    CREATE TABLE IF NOT EXISTS sync_meta (
+      user_id TEXT PRIMARY KEY NOT NULL,
+      last_synced_at TEXT
+    );
   `);
 }
