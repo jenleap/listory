@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid';
+import { generateId } from '../../../utils/generate-id';
 import { List, CreateListInput } from '../types';
 import { insertList, listNameExistsForOwner } from '../db/lists-db';
 
@@ -19,7 +19,7 @@ export function createList(input: CreateListInput): CreateListResult {
 
   const now = new Date().toISOString();
   const list: List = {
-    id: uuid(),
+    id: generateId(),
     name: trimmedName,
     owner_id: input.owner_id,
     is_template: false,

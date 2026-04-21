@@ -11,5 +11,17 @@ export function initSchema(): void {
       updated_at TEXT NOT NULL,
       deleted_at TEXT
     );
+
+    CREATE TABLE IF NOT EXISTS items (
+      id TEXT PRIMARY KEY NOT NULL,
+      text TEXT NOT NULL,
+      list_id TEXT NOT NULL,
+      section_id TEXT,
+      completed INTEGER NOT NULL DEFAULT 0,
+      "order" INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      deleted_at TEXT
+    );
   `);
 }
