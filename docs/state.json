@@ -1,16 +1,13 @@
 {
-    "current_feature": "F001-create-list",
-    "current_task_id": "T009-list-screen",
-    "status": "completed",
+    "current_feature": "F002-add-item",
+    "current_task_id": "T001-item-types",
+    "status": "in_progress",
     "tasks": [
-        { "id": "T001-db-client-setup", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T002-db-schema-init", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T003-list-types", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T004-list-db-operations", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T005-list-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T006-use-create-list-hook", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T007-navigation-setup", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T008-main-screen", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T009-list-screen", "status": "completed", "attempts": 1, "errors": null }
+        { "id": "T001-item-types", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T002-items-db-schema", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T003-item-db-operations", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T004-item-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T005-use-items-hook", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T006-list-screen-update", "status": "pending", "attempts": 0, "errors": null }
     ]
 }
