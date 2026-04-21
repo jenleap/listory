@@ -1,6 +1,6 @@
-# MadChatter
+# Listory
 
-MadChatter is an AI-powered chat application, powered by a locally running LLM.
+Listory is an offline-first mobile app that allows users within a household to create, manage, and share lists.
 
 ### Context Files
 Read the following to get the full context of the project:

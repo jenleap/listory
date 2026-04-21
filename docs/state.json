@@ -1,6 +1,16 @@
 {
-    "current_feature": "",
-    "current_task_id": "",
-    "status": "not_started",
-    "tasks": []
+    "current_feature": "F001-create-list",
+    "current_task_id": "T001-db-client-setup",
+    "status": "in_progress",
+    "tasks": [
+        { "id": "T001-db-client-setup", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T002-db-schema-init", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T003-list-types", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T004-list-db-operations", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T005-list-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T006-use-create-list-hook", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T007-navigation-setup", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T008-main-screen", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T009-list-screen", "status": "pending", "attempts": 0, "errors": null }
+    ]
 }
