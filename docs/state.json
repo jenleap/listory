@@ -1,13 +1,18 @@
 {
-    "current_feature": "F002-add-item",
-    "current_task_id": "T006-list-screen-update",
-    "status": "completed",
+    "current_feature": "F003-sync-engine",
+    "current_task_id": "T001-sync-shared-types",
+    "status": "in_progress",
     "tasks": [
-        { "id": "T001-item-types", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T002-items-db-schema", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T003-item-db-operations", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T004-item-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T005-use-items-hook", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T006-list-screen-update", "status": "completed", "attempts": 1, "errors": null }
+        { "id": "T001-sync-shared-types", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T002-server-setup", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T003-postgres-schema", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T004-server-push-endpoint", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T005-server-pull-endpoint", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T006-sync-meta-db", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T007-push-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T008-pull-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T009-merge-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T010-sync-orchestrator", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T011-use-sync-hook", "status": "pending", "attempts": 0, "errors": null }
     ]
 }
