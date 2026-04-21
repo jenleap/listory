@@ -50,3 +50,4 @@
 {"timestamp":"2026-04-21T12:17:00Z","event":"task_completed","feature_id":"F003-sync-engine","task_id":"T010-sync-orchestrator","notes":""}
 {"timestamp":"2026-04-21T12:18:00Z","event":"task_started","feature_id":"F003-sync-engine","task_id":"T011-use-sync-hook","notes":""}
 {"timestamp":"2026-04-21T12:19:00Z","event":"task_completed","feature_id":"F003-sync-engine","task_id":"T011-use-sync-hook","notes":""}
+{"timestamp":"2026-04-21T00:00:00Z","event":"task_started","feature_id":"F003-01-electricsql","task_id":"T001-remove-server-sync-routes","notes":""}

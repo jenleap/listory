@@ -1,18 +1,14 @@
 {
-    "current_feature": "F003-sync-engine",
-    "current_task_id": "T011-use-sync-hook",
-    "status": "completed",
+    "current_feature": "F003-01-electricsql",
+    "current_task_id": "T001-remove-server-sync-routes",
+    "status": "in_progress",
     "tasks": [
-        { "id": "T001-sync-shared-types", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T002-server-setup", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T003-postgres-schema", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T004-server-push-endpoint", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T005-server-pull-endpoint", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T006-sync-meta-db", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T007-push-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T008-pull-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T009-merge-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T010-sync-orchestrator", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T011-use-sync-hook", "status": "completed", "attempts": 1, "errors": null }
+        { "id": "T001-remove-server-sync-routes", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T002-add-electric-docker-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T003-electrify-postgres-tables", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T004-remove-mobile-sync-services", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T005-update-sync-types", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T006-setup-electric-client", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T007-replace-use-sync-hook", "status": "pending", "attempts": 0, "errors": null }
     ]
 }
