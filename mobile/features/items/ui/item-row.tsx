@@ -11,9 +11,10 @@ import { Item } from '../types';
 type Props = {
   item: Item;
   onEdit: (id: string, newText: string) => boolean;
+  onDelete: (id: string) => boolean;
 };
 
-export default function ItemRow({ item, onEdit }: Props) {
+export default function ItemRow({ item, onEdit, onDelete }: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(item.text);
   const inputRef = useRef<TextInput>(null);
@@ -33,6 +34,11 @@ export default function ItemRow({ item, onEdit }: Props) {
     inputRef.current?.blur();
   }
 
+  function handleDelete() {
+    onDelete(item.id);
+    setIsEditing(false);
+  }
+
   if (isEditing) {
     return (
       <View style={styles.row}>
@@ -46,6 +52,9 @@ export default function ItemRow({ item, onEdit }: Props) {
           onSubmitEditing={handleSubmitEditing}
           returnKeyType="done"
         />
+        <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
+          <Text style={styles.deleteButtonText}>Delete</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -77,5 +86,15 @@ const styles = StyleSheet.create({
   completedText: {
     textDecorationLine: 'line-through',
     color: '#aaa',
+  },
+  deleteButton: {
+    marginTop: 4,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    alignSelf: 'flex-start',
+  },
+  deleteButtonText: {
+    color: '#cc0000',
+    fontSize: 14,
   },
 });

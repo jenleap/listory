@@ -21,3 +21,7 @@ export interface EditItemInput {
   list_id: string;
   new_text: string;
 }
+
+export interface DeleteItemInput {
+  id: string;
+}

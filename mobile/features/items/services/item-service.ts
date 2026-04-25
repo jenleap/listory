@@ -1,5 +1,5 @@
 import { generateId } from '../../../utils/generate-id';
-import { Item, CreateItemInput, EditItemInput } from '../types';
+import { Item, CreateItemInput, EditItemInput, DeleteItemInput } from '../types';
 import {
   insertItem,
   getItemsByList,
@@ -68,4 +68,25 @@ export function editItem(input: EditItemInput): EditItemResult {
 
   const updated = getItemById(input.id);
   return { success: true, deleted: false, item: updated! };
+}
+
+type DeleteItemResult =
+  | { success: true }
+  | { success: false; error: string };
+
+export function deleteItem(input: DeleteItemInput): DeleteItemResult {
+  const item = getItemById(input.id);
+
+  if (item == null) {
+    return { success: false, error: 'Item not found' };
+  }
+
+  if (item.deleted_at != null) {
+    return { success: true };
+  }
+
+  const now = new Date().toISOString();
+  softDeleteItem(input.id, now, now);
+
+  return { success: true };
 }

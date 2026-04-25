@@ -22,7 +22,7 @@ const HEADER_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
 export default function ListScreen({ route }: Props) {
   const { listId } = route.params;
-  const { items, error, addItem, editItem } = useItems(listId);
+  const { items, error, addItem, editItem, deleteItem } = useItems(listId);
   const [inputText, setInputText] = useState('');
   const insets = useSafeAreaInsets();
   const inputRef = useRef<TextInput>(null);
@@ -41,7 +41,7 @@ export default function ListScreen({ route }: Props) {
   }
 
   function renderItem({ item }: { item: Item }) {
-    return <ItemRow item={item} onEdit={editItem} />;
+    return <ItemRow item={item} onEdit={editItem} onDelete={deleteItem} />;
   }
 
   return (
