@@ -1,12 +1,11 @@
 {
-    "current_feature": "F004-edit-item",
-    "current_task_id": "T005-wire-edit-in-list-screen",
-    "status": "completed",
+    "current_feature": "F005-delete-item",
+    "current_task_id": "T001-delete-item-service",
+    "status": "in_progress",
     "tasks": [
-        { "id": "T001-update-item-db", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T002-edit-item-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T003-update-use-items-hook", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T004-item-row-component", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T005-wire-edit-in-list-screen", "status": "completed", "attempts": 1, "errors": null }
+        { "id": "T001-delete-item-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T002-update-use-items-hook", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T003-item-row-delete-button", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T004-wire-delete-in-list-screen", "status": "pending", "attempts": 0, "errors": null }
     ]
 }
