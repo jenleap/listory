@@ -15,17 +15,28 @@ import { RootStackParamList } from '../../../navigation/types';
 import { useItems } from '../../items/hooks/use-items';
 import { Item } from '../../items/types';
 import ItemRow from '../../items/ui/item-row';
+import { useSections } from '../../sections/hooks/use-sections';
+import { Section } from '../../sections/types';
+import SectionHeader from '../../sections/ui/section-header';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'List'>;
+
+type ListRow =
+  | { type: 'section'; section: Section }
+  | { type: 'item'; item: Item };
 
 const HEADER_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
 export default function ListScreen({ route }: Props) {
   const { listId } = route.params;
-  const { items, error, addItem, editItem, deleteItem } = useItems(listId);
+  const { items, error: itemError, addItem, editItem, deleteItem } = useItems(listId);
+  const { sections, error: sectionError, addSection } = useSections(listId);
   const [inputText, setInputText] = useState('');
+  const [isAddingSection, setIsAddingSection] = useState(false);
+  const [sectionInputText, setSectionInputText] = useState('');
   const insets = useSafeAreaInsets();
   const inputRef = useRef<TextInput>(null);
+  const sectionInputRef = useRef<TextInput>(null);
 
   function handleSubmit() {
     const trimmed = inputText.trim();
@@ -40,9 +51,54 @@ export default function ListScreen({ route }: Props) {
     setInputText(text);
   }
 
-  function renderItem({ item }: { item: Item }) {
-    return <ItemRow item={item} onEdit={editItem} onDelete={deleteItem} />;
+  function handleAddSectionPress() {
+    setIsAddingSection(true);
+    setSectionInputText('');
+    setTimeout(() => sectionInputRef.current?.focus(), 50);
   }
+
+  function handleSectionInputBlur() {
+    addSection(sectionInputText);
+    setIsAddingSection(false);
+    setSectionInputText('');
+  }
+
+  function handleSectionInputSubmit() {
+    sectionInputRef.current?.blur();
+  }
+
+  function buildRows(): ListRow[] {
+    const rows: ListRow[] = [];
+
+    const unsectioned = items.filter((i) => i.section_id === null);
+    for (const item of unsectioned) {
+      rows.push({ type: 'item', item });
+    }
+
+    for (const section of sections) {
+      rows.push({ type: 'section', section });
+      const sectionItems = items.filter((i) => i.section_id === section.id);
+      for (const item of sectionItems) {
+        rows.push({ type: 'item', item });
+      }
+    }
+
+    return rows;
+  }
+
+  function renderRow({ item: row }: { item: ListRow }) {
+    if (row.type === 'section') {
+      return <SectionHeader name={row.section.name} />;
+    }
+    return <ItemRow item={row.item} onEdit={editItem} onDelete={deleteItem} />;
+  }
+
+  function rowKey(row: ListRow) {
+    return row.type === 'section' ? `section-${row.section.id}` : `item-${row.item.id}`;
+  }
+
+  const rows = buildRows();
+  const error = itemError ?? sectionError;
 
   return (
     <KeyboardAvoidingView
@@ -50,15 +106,30 @@ export default function ListScreen({ route }: Props) {
       behavior={Platform.OS === 'ios' ? 'padding' : 'padding'}
       keyboardVerticalOffset={HEADER_HEIGHT + insets.top}
     >
-      {items.length === 0 ? (
+      {rows.length === 0 ? (
         <Text style={styles.empty}>No items yet.</Text>
       ) : (
         <FlatList
-          data={items}
-          keyExtractor={(item) => item.id}
-          renderItem={renderItem}
+          data={rows}
+          keyExtractor={rowKey}
+          renderItem={renderRow}
           keyboardShouldPersistTaps="handled"
         />
+      )}
+
+      {isAddingSection && (
+        <View style={styles.sectionInputContainer}>
+          <TextInput
+            ref={sectionInputRef}
+            style={styles.sectionInput}
+            placeholder="Section name…"
+            value={sectionInputText}
+            onChangeText={setSectionInputText}
+            onBlur={handleSectionInputBlur}
+            onSubmitEditing={handleSectionInputSubmit}
+            returnKeyType="done"
+          />
+        </View>
       )}
 
       <View style={[styles.inputContainer, { paddingBottom: insets.bottom + 8 }]}>
@@ -81,6 +152,9 @@ export default function ListScreen({ route }: Props) {
           >
             <Text style={styles.addButtonText}>Add</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.sectionButton} onPress={handleAddSectionPress}>
+            <Text style={styles.sectionButtonText}>+ Section</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -98,6 +172,18 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     color: '#888',
     marginTop: 80,
+  },
+  sectionInputContainer: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: '#ddd',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    backgroundColor: '#f5f5f5',
+  },
+  sectionInput: {
+    fontSize: 15,
+    color: '#000',
+    paddingVertical: 4,
   },
   inputContainer: {
     borderTopWidth: StyleSheet.hairlineWidth,
@@ -130,6 +216,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 15,
     fontWeight: '600',
+  },
+  sectionButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  sectionButtonText: {
+    color: '#007AFF',
+    fontSize: 15,
   },
   errorText: {
     color: '#cc0000',
