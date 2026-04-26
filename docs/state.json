@@ -1,14 +1,12 @@
 {
-    "current_feature": "F006-create-section",
-    "current_task_id": "T007-wire-sections-list-screen",
-    "status": "completed",
+    "current_feature": "F007-toggle-item-complete",
+    "current_task_id": "T001-toggle-item-db",
+    "status": "in_progress",
     "tasks": [
-        { "id": "T001-sections-db-schema", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T002-section-types", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T003-section-db-operations", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T004-section-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T005-use-sections-hook", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T006-section-header-component", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T007-wire-sections-list-screen", "status": "completed", "attempts": 1, "errors": null }
+        { "id": "T001-toggle-item-db", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T002-toggle-item-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T003-use-items-hook-toggle", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T004-item-row-checkbox", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T005-wire-toggle-list-screen", "status": "pending", "attempts": 0, "errors": null }
     ]
 }
