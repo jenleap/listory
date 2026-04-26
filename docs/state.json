@@ -1,11 +1,14 @@
 {
-    "current_feature": "F005-delete-item",
-    "current_task_id": "T004-wire-delete-in-list-screen",
-    "status": "completed",
+    "current_feature": "F006-create-section",
+    "current_task_id": "T001-sections-db-schema",
+    "status": "in_progress",
     "tasks": [
-        { "id": "T001-delete-item-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T002-update-use-items-hook", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T003-item-row-delete-button", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T004-wire-delete-in-list-screen", "status": "completed", "attempts": 1, "errors": null }
+        { "id": "T001-sections-db-schema", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T002-section-types", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T003-section-db-operations", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T004-section-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T005-use-sections-hook", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T006-section-header-component", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T007-wire-sections-list-screen", "status": "pending", "attempts": 0, "errors": null }
     ]
 }
