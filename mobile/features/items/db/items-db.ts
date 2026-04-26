@@ -87,3 +87,10 @@ export function softDeleteItem(id: string, deletedAt: string, updatedAt: string)
     [deletedAt, updatedAt, id]
   );
 }
+
+export function toggleItemComplete(id: string, completed: boolean, updatedAt: string): void {
+  db.runSync(
+    `UPDATE items SET completed = ?, updated_at = ? WHERE id = ?`,
+    [completed ? 1 : 0, updatedAt, id]
+  );
+}

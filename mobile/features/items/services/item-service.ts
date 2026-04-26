@@ -1,5 +1,5 @@
 import { generateId } from '../../../utils/generate-id';
-import { Item, CreateItemInput, EditItemInput, DeleteItemInput } from '../types';
+import { Item, CreateItemInput, EditItemInput, DeleteItemInput, ToggleItemInput } from '../types';
 import {
   insertItem,
   getItemsByList,
@@ -8,6 +8,7 @@ import {
   updateItem,
   softDeleteItem,
   getItemById,
+  toggleItemComplete,
 } from '../db/items-db';
 
 type AddItemResult =
@@ -68,6 +69,24 @@ export function editItem(input: EditItemInput): EditItemResult {
 
   const updated = getItemById(input.id);
   return { success: true, deleted: false, item: updated! };
+}
+
+type ToggleItemResult =
+  | { success: true; item: Item }
+  | { success: false; error: string };
+
+export function toggleItem(input: ToggleItemInput): ToggleItemResult {
+  const item = getItemById(input.id);
+
+  if (item == null) {
+    return { success: false, error: 'Item not found' };
+  }
+
+  const now = new Date().toISOString();
+  toggleItemComplete(input.id, !item.completed, now);
+
+  const updated = getItemById(input.id);
+  return { success: true, item: updated! };
 }
 
 type DeleteItemResult =

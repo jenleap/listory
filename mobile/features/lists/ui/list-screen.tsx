@@ -29,7 +29,7 @@ const HEADER_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
 export default function ListScreen({ route }: Props) {
   const { listId } = route.params;
-  const { items, error: itemError, addItem, editItem, deleteItem } = useItems(listId);
+  const { items, error: itemError, addItem, editItem, deleteItem, toggleItem } = useItems(listId);
   const { sections, error: sectionError, addSection } = useSections(listId);
   const [inputText, setInputText] = useState('');
   const [isAddingSection, setIsAddingSection] = useState(false);
@@ -90,7 +90,7 @@ export default function ListScreen({ route }: Props) {
     if (row.type === 'section') {
       return <SectionHeader name={row.section.name} />;
     }
-    return <ItemRow item={row.item} onEdit={editItem} onDelete={deleteItem} />;
+    return <ItemRow item={row.item} onEdit={editItem} onDelete={deleteItem} onToggle={toggleItem} />;
   }
 
   function rowKey(row: ListRow) {

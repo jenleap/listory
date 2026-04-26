@@ -25,3 +25,7 @@ export interface EditItemInput {
 export interface DeleteItemInput {
   id: string;
 }
+
+export interface ToggleItemInput {
+  id: string;
+}
