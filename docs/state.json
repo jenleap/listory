@@ -1,15 +1,13 @@
 {
-    "current_feature": "F009-share-list",
-    "current_task_id": "T008-wire-list-screen",
-    "status": "completed",
+    "current_feature": "F010-remove-list",
+    "current_task_id": "T001-add-soft-delete-list-user-db",
+    "status": "in_progress",
     "tasks": [
-        { "id": "T001-add-schema-tables", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T002-add-types", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T003-add-users-db", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T004-add-list-users-db", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T005-add-share-list-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T006-add-use-list-users-hook", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T007-add-share-list-modal", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T008-wire-list-screen", "status": "completed", "attempts": 1, "errors": null }
+        { "id": "T001-add-soft-delete-list-user-db", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T002-add-remove-list-user-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T003-update-use-list-users-hook", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T004-add-get-lists-for-user-db", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T005-update-use-lists-hook", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T006-wire-list-screen", "status": "pending", "attempts": 0, "errors": null }
     ]
 }
