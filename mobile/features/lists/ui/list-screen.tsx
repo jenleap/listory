@@ -19,6 +19,9 @@ import ItemRow from '../../items/ui/item-row';
 import { useSections } from '../../sections/hooks/use-sections';
 import { Section } from '../../sections/types';
 import SectionHeader from '../../sections/ui/section-header';
+import ShareListModal from '../../list-users/ui/share-list-modal';
+
+const CURRENT_USER_ID = 'user-1';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'List'>;
 
@@ -29,11 +32,12 @@ type ListRow =
 const HEADER_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
 export default function ListScreen({ route, navigation }: Props) {
-  const { listId } = route.params;
+  const { listId, ownerId } = route.params;
   const { items, error: itemError, addItem, editItem, deleteItem, toggleItem, clearCompleted } = useItems(listId);
   const { sections, error: sectionError, addSection } = useSections(listId);
   const [inputText, setInputText] = useState('');
   const [isAddingSection, setIsAddingSection] = useState(false);
+  const [shareModalVisible, setShareModalVisible] = useState(false);
   const [sectionInputText, setSectionInputText] = useState('');
   const insets = useSafeAreaInsets();
   const inputRef = useRef<TextInput>(null);
@@ -79,13 +83,16 @@ export default function ListScreen({ route, navigation }: Props) {
   }, [navigation]);
 
   function handleEllipsisPress() {
-    Alert.alert('List Actions', undefined, [
-      {
-        text: 'Clear Completed',
-        onPress: () => clearCompleted(),
-      },
-      { text: 'Cancel', style: 'cancel' },
-    ]);
+    const isOwner = CURRENT_USER_ID === ownerId;
+    const options: { text: string; onPress?: () => void; style?: 'cancel' | 'destructive' | 'default' }[] = [];
+
+    if (isOwner) {
+      options.push({ text: 'Share', onPress: () => setShareModalVisible(true) });
+    }
+    options.push({ text: 'Clear Completed', onPress: () => clearCompleted() });
+    options.push({ text: 'Cancel', style: 'cancel' });
+
+    Alert.alert('List Actions', undefined, options);
   }
 
   function buildRows(): ListRow[] {
@@ -178,6 +185,13 @@ export default function ListScreen({ route, navigation }: Props) {
           </TouchableOpacity>
         </View>
       </View>
+      <ShareListModal
+        visible={shareModalVisible}
+        onClose={() => setShareModalVisible(false)}
+        listId={listId}
+        listOwnerId={ownerId}
+        currentUserId={CURRENT_USER_ID}
+      />
     </KeyboardAvoidingView>
   );
 }

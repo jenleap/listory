@@ -42,7 +42,7 @@ export default function MainScreen({ navigation }: Props) {
     return (
       <TouchableOpacity
         style={styles.row}
-        onPress={() => navigation.navigate('List', { listId: item.id, listName: item.name })}
+        onPress={() => navigation.navigate('List', { listId: item.id, listName: item.name, ownerId: item.owner_id })}
       >
         <Text style={styles.rowText}>{item.name}</Text>
       </TouchableOpacity>
