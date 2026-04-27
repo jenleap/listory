@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ListUserWithName } from '../types';
 import { getListUsersWithNames } from '../db/list-users-db';
-import { shareList as shareListService } from '../services/share-list-service';
+import { shareList as shareListService, removeListUser as removeListUserService } from '../services/share-list-service';
 import { getUserByEmail } from '../../users/db/users-db';
 
 export function useListUsers(listId: string, listOwnerId: string, currentUserId: string) {
@@ -48,5 +48,20 @@ export function useListUsers(listId: string, listOwnerId: string, currentUserId:
     [listId, listOwnerId, currentUserId]
   );
 
-  return { sharedUsers, error, shareList };
+  const removeListUser = useCallback(
+    (listId: string, userId: string, ownerId: string): boolean => {
+      const result = removeListUserService({ list_id: listId, user_id: userId, owner_id: ownerId });
+
+      if (!result.success) {
+        setError(result.error);
+        return false;
+      }
+
+      setError(null);
+      return true;
+    },
+    []
+  );
+
+  return { sharedUsers, error, shareList, removeListUser };
 }

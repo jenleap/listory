@@ -29,6 +29,13 @@ export function getListUserExists(list_id: string, user_id: string): boolean {
   return row != null;
 }
 
+export function softDeleteListUser(list_id: string, user_id: string, deletedAt: string, updatedAt: string): void {
+  db.runSync(
+    `UPDATE list_users SET deleted_at = ?, updated_at = ? WHERE list_id = ? AND user_id = ?`,
+    [deletedAt, updatedAt, list_id, user_id]
+  );
+}
+
 export function getListUsersWithNames(list_id: string): ListUserWithName[] {
   return db.getAllSync<ListUserWithName>(
     `SELECT lu.list_id, lu.user_id, lu.access, lu.created_at, lu.updated_at, lu.deleted_at,

@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import { List } from '../types';
 import { createList } from '../services/list-service';
-import { getListsByOwner } from '../db/lists-db';
+import { getListsForUser } from '../db/lists-db';
 
 export function useLists(owner_id: string) {
   const [lists, setLists] = useState<List[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLists(getListsByOwner(owner_id));
+    setLists(getListsForUser(owner_id));
   }, [owner_id]);
 
   const handleCreateList = useCallback(

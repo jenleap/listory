@@ -20,6 +20,7 @@ import { useSections } from '../../sections/hooks/use-sections';
 import { Section } from '../../sections/types';
 import SectionHeader from '../../sections/ui/section-header';
 import ShareListModal from '../../list-users/ui/share-list-modal';
+import { useListUsers } from '../../list-users/hooks/use-list-users';
 
 const CURRENT_USER_ID = 'user-1';
 
@@ -35,6 +36,7 @@ export default function ListScreen({ route, navigation }: Props) {
   const { listId, ownerId } = route.params;
   const { items, error: itemError, addItem, editItem, deleteItem, toggleItem, clearCompleted } = useItems(listId);
   const { sections, error: sectionError, addSection } = useSections(listId);
+  const { removeListUser } = useListUsers(listId, ownerId, CURRENT_USER_ID);
   const [inputText, setInputText] = useState('');
   const [isAddingSection, setIsAddingSection] = useState(false);
   const [shareModalVisible, setShareModalVisible] = useState(false);
@@ -82,12 +84,34 @@ export default function ListScreen({ route, navigation }: Props) {
     });
   }, [navigation]);
 
+  function handleRemoveFromList() {
+    Alert.alert(
+      'Remove From List',
+      'Are you sure you want to remove yourself from this list?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Remove Me',
+          style: 'destructive',
+          onPress: () => {
+            const success = removeListUser(listId, CURRENT_USER_ID, ownerId);
+            if (success) {
+              navigation.goBack();
+            }
+          },
+        },
+      ]
+    );
+  }
+
   function handleEllipsisPress() {
     const isOwner = CURRENT_USER_ID === ownerId;
     const options: { text: string; onPress?: () => void; style?: 'cancel' | 'destructive' | 'default' }[] = [];
 
     if (isOwner) {
       options.push({ text: 'Share', onPress: () => setShareModalVisible(true) });
+    } else {
+      options.push({ text: 'Remove Me From List', style: 'destructive', onPress: handleRemoveFromList });
     }
     options.push({ text: 'Clear Completed', onPress: () => clearCompleted() });
     options.push({ text: 'Cancel', style: 'cancel' });
