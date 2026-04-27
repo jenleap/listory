@@ -29,3 +29,7 @@ export interface DeleteItemInput {
 export interface ToggleItemInput {
   id: string;
 }
+
+export interface ClearCompletedInput {
+  list_id: string;
+}

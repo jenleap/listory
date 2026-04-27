@@ -1,5 +1,5 @@
 import { generateId } from '../../../utils/generate-id';
-import { Item, CreateItemInput, EditItemInput, DeleteItemInput, ToggleItemInput } from '../types';
+import { Item, CreateItemInput, EditItemInput, DeleteItemInput, ToggleItemInput, ClearCompletedInput } from '../types';
 import {
   insertItem,
   getItemsByList,
@@ -9,6 +9,7 @@ import {
   softDeleteItem,
   getItemById,
   toggleItemComplete,
+  clearCompletedItems as clearCompletedItemsDb,
 } from '../db/items-db';
 
 type AddItemResult =
@@ -107,5 +108,15 @@ export function deleteItem(input: DeleteItemInput): DeleteItemResult {
   const now = new Date().toISOString();
   softDeleteItem(input.id, now, now);
 
+  return { success: true };
+}
+
+type ClearCompletedResult =
+  | { success: true }
+  | { success: false; error: string };
+
+export function clearCompletedItems(input: ClearCompletedInput): ClearCompletedResult {
+  const now = new Date().toISOString();
+  clearCompletedItemsDb(input.list_id, now, now);
   return { success: true };
 }

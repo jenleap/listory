@@ -108,3 +108,10 @@
 {"timestamp":"2026-04-26T00:08:00Z","event":"task_started","feature_id":"F007-toggle-item-complete","task_id":"T005-wire-toggle-list-screen","notes":""}
 {"timestamp":"2026-04-26T00:09:00Z","event":"task_completed","feature_id":"F007-toggle-item-complete","task_id":"T005-wire-toggle-list-screen","notes":""}
 {"timestamp":"2026-04-26T00:10:00Z","event":"task_started","feature_id":"F008-clear-completed","task_id":"T001-clear-completed-db","notes":"tasks generated for F008"}
+{"timestamp":"2026-04-26T00:11:00Z","event":"task_completed","feature_id":"F008-clear-completed","task_id":"T001-clear-completed-db","notes":""}
+{"timestamp":"2026-04-26T00:12:00Z","event":"task_started","feature_id":"F008-clear-completed","task_id":"T002-clear-completed-service","notes":""}
+{"timestamp":"2026-04-26T00:13:00Z","event":"task_completed","feature_id":"F008-clear-completed","task_id":"T002-clear-completed-service","notes":""}
+{"timestamp":"2026-04-26T00:14:00Z","event":"task_started","feature_id":"F008-clear-completed","task_id":"T003-use-items-hook-clear","notes":""}
+{"timestamp":"2026-04-26T00:15:00Z","event":"task_completed","feature_id":"F008-clear-completed","task_id":"T003-use-items-hook-clear","notes":""}
+{"timestamp":"2026-04-26T00:16:00Z","event":"task_started","feature_id":"F008-clear-completed","task_id":"T004-wire-clear-completed-list-screen","notes":""}
+{"timestamp":"2026-04-26T00:17:00Z","event":"task_completed","feature_id":"F008-clear-completed","task_id":"T004-wire-clear-completed-list-screen","notes":""}

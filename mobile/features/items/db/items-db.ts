@@ -94,3 +94,10 @@ export function toggleItemComplete(id: string, completed: boolean, updatedAt: st
     [completed ? 1 : 0, updatedAt, id]
   );
 }
+
+export function clearCompletedItems(list_id: string, deletedAt: string, updatedAt: string): void {
+  db.runSync(
+    `UPDATE items SET deleted_at = ?, updated_at = ? WHERE list_id = ? AND completed = 1 AND deleted_at IS NULL`,
+    [deletedAt, updatedAt, list_id]
+  );
+}

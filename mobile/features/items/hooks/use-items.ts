@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Item } from '../types';
-import { addItem, editItem, deleteItem, toggleItem } from '../services/item-service';
+import { addItem, editItem, deleteItem, toggleItem, clearCompletedItems } from '../services/item-service';
 import { getItemsByList } from '../db/items-db';
 
 export function useItems(list_id: string) {
@@ -71,5 +71,19 @@ export function useItems(list_id: string) {
     []
   );
 
-  return { items, error, addItem: handleAddItem, editItem: handleEditItem, deleteItem: handleDeleteItem, toggleItem: handleToggleItem };
+  const handleClearCompleted = useCallback(
+    (): boolean => {
+      const result = clearCompletedItems({ list_id });
+      if (!result.success) {
+        setError(result.error);
+        return false;
+      }
+      setItems((prev) => prev.filter((i) => !i.completed));
+      setError(null);
+      return true;
+    },
+    [list_id]
+  );
+
+  return { items, error, addItem: handleAddItem, editItem: handleEditItem, deleteItem: handleDeleteItem, toggleItem: handleToggleItem, clearCompleted: handleClearCompleted };
 }

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -27,9 +28,9 @@ type ListRow =
 
 const HEADER_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
-export default function ListScreen({ route }: Props) {
+export default function ListScreen({ route, navigation }: Props) {
   const { listId } = route.params;
-  const { items, error: itemError, addItem, editItem, deleteItem, toggleItem } = useItems(listId);
+  const { items, error: itemError, addItem, editItem, deleteItem, toggleItem, clearCompleted } = useItems(listId);
   const { sections, error: sectionError, addSection } = useSections(listId);
   const [inputText, setInputText] = useState('');
   const [isAddingSection, setIsAddingSection] = useState(false);
@@ -65,6 +66,26 @@ export default function ListScreen({ route }: Props) {
 
   function handleSectionInputSubmit() {
     sectionInputRef.current?.blur();
+  }
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={handleEllipsisPress} style={styles.headerButton}>
+          <Text style={styles.headerButtonText}>•••</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
+  function handleEllipsisPress() {
+    Alert.alert('List Actions', undefined, [
+      {
+        text: 'Clear Completed',
+        onPress: () => clearCompleted(),
+      },
+      { text: 'Cancel', style: 'cancel' },
+    ]);
   }
 
   function buildRows(): ListRow[] {
@@ -229,5 +250,14 @@ const styles = StyleSheet.create({
     color: '#cc0000',
     fontSize: 13,
     marginBottom: 4,
+  },
+  headerButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+  },
+  headerButtonText: {
+    fontSize: 20,
+    color: '#007AFF',
+    letterSpacing: 2,
   },
 });
