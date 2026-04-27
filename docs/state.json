@@ -1,12 +1,11 @@
 {
-    "current_feature": "F007-toggle-item-complete",
-    "current_task_id": "T005-wire-toggle-list-screen",
-    "status": "completed",
+    "current_feature": "F008-clear-completed",
+    "current_task_id": "T001-clear-completed-db",
+    "status": "in_progress",
     "tasks": [
-        { "id": "T001-toggle-item-db", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T002-toggle-item-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T003-use-items-hook-toggle", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T004-item-row-checkbox", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T005-wire-toggle-list-screen", "status": "completed", "attempts": 1, "errors": null }
+        { "id": "T001-clear-completed-db", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T002-clear-completed-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T003-use-items-hook-clear", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T004-wire-clear-completed-list-screen", "status": "pending", "attempts": 0, "errors": null }
     ]
 }
