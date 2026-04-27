@@ -1,11 +1,15 @@
 {
-    "current_feature": "F008-clear-completed",
-    "current_task_id": "T004-wire-clear-completed-list-screen",
-    "status": "completed",
+    "current_feature": "F009-share-list",
+    "current_task_id": "T001-add-schema-tables",
+    "status": "in_progress",
     "tasks": [
-        { "id": "T001-clear-completed-db", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T002-clear-completed-service", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T003-use-items-hook-clear", "status": "completed", "attempts": 1, "errors": null },
-        { "id": "T004-wire-clear-completed-list-screen", "status": "completed", "attempts": 1, "errors": null }
+        { "id": "T001-add-schema-tables", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T002-add-types", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T003-add-users-db", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T004-add-list-users-db", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T005-add-share-list-service", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T006-add-use-list-users-hook", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T007-add-share-list-modal", "status": "pending", "attempts": 0, "errors": null },
+        { "id": "T008-wire-list-screen", "status": "pending", "attempts": 0, "errors": null }
     ]
 }
